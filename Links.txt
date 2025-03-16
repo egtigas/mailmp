@@ -1,0 +1,20 @@
+How to pass file pointer to a function in c
+https://stackoverflow.com/questions/67057003/how-to-pass-file-pointer-to-a-function-in-c
+
+C Pass Addresses and Pointers
+https://www.programiz.com/c-programming/c-pointer-functions
+
+fread/fwrite string in C
+https://stackoverflow.com/questions/2397707/fread-fwrite-string-in-c
+
+How to declare a structure in a header that is to be used by multiple files in c?
+https://stackoverflow.com/questions/228684/how-to-declare-a-structure-in-a-header-that-is-to-be-used-by-multiple-files-in-c
+
+
+How to split string in C without using strtok
+https://stackoverflow.com/questions/12410280/how-to-split-string-in-c-without-using-strtok
+
+C Programming Tutorial 72, "Editing" a Text File
+https://www.youtube.com/watch?v=2pBVlpLM1Sc
+
+

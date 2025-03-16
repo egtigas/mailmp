@@ -1,0 +1,1 @@
+robocopy /MIR "C:\Users\sidney\Documents\CCPROG2 ASSIGNMENTS\MOCK HANDS ON 1\mailmp" "C:\MSI\Git\Sidney\mail"
