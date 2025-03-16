@@ -1,4 +1,4 @@
-main {
+main { 
     user login {
         compose message {
 			compose message {}
