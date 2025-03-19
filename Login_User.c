@@ -1,6 +1,6 @@
 void Login_User(){
 
-	int j,k;
+	int j=0,k=0;
 	int index = 1, match = 0;
 	char row[1000];
 	char Enter_Username[100];
@@ -21,7 +21,8 @@ void Login_User(){
 	// This gets the index of the user file. It counts how many rows there are (eg. 2 rows) so the index counts as 2 users.
 	// fgets() opens the file.
 	// strtok() separates / identifies the user through the delimiter ";".
-	while(fgets(row,sizeof(row),file_pointer)){
+	while(fgets(row,sizeof(row),file_pointer) >0 ){
+				user[index].User_Index=index;
 				strcpy(user[index].Username,strtok(row, delimiter));
 				strcpy(user[index].Full_Name, strtok(NULL, delimiter));
 				strcpy(user[index].Password, strtok(NULL, delimiter));
@@ -30,6 +31,8 @@ void Login_User(){
 				strcpy(user[index].Description, strtok(NULL, delimiter));
 				index++;
 		}
+	
+	userCount = index;
 			
 	while(match == 0){ // it loops and checks if username is INVALID. if it is, it asks user to input again
 		printf("Username: ");
@@ -48,7 +51,7 @@ void Login_User(){
 							}
 							if(strcmp(user[j].Password, Enter_Password)==0){ // if username and password are VALID, it brings user into the User Page.
 								fclose(file_pointer);
-								User_Page(j);
+								User_Page(j,&userCount);
 							}
 							
 							else{ // prints if the input password doesnt exist.

@@ -5,14 +5,27 @@ void User_Page(int user_index){
 	int msgCount=0; //Count of messages and announcements
 
 
-	printf("USERPAGE \n");	
+	//printf("USERPAGE: Start %d\n",userCount);	
 	//malloc(MAX_MSSG_COUNT * sizeof(message_entries));
-	messageTag message_entries[100]; //Array of all messages from all users
+
+	//messageTag message_entries[1000]; //Array of all messages from all users	
+	struct messageTag *message_entries = (struct messageTag *)malloc(MAX_MSSG_COUNT * sizeof(struct messageTag));
+	if (message_entries == NULL) {
+        printf("Memory allocation failed.\n");
+    }
+	
+	//Load message file
+	Load_Message_File(message_entries,&msgCount);
+
+	//*********	
+	//Debug only check if messages are loaded in memory
+	//Print_Message_File(message_entries,&msgCount);
+	//*********
 	
 	//do
 	while(1)
 	{
-		//system("cls");
+		system("cls");
 		printf("=====================================================\n");
 		printf("                      USER PAGE                      \n");
 		printf("Welcome: %s!\n",user[user_index].Full_Name);
@@ -48,15 +61,14 @@ void User_Page(int user_index){
 				
 				switch(choice2){
 					case 1:
-						//Load message file here
 						//Compose_Message(user[user_index].Username,&msgCount,0);
+						Compose_Message(message_entries,user[user_index].Username,&msgCount,0);						
 						printf("Exit from Compose Message.\n\n");					
 						break;
 					case 2:
-						//Load message file here
 						Compose_Message(message_entries,user[user_index].Username,&msgCount,1);
 						printf("Exit from Compose Announcement.\n\n");
-						printf("%d:%s:%s:\n",msgCount,message_entries[msgCount-1].Sender,message_entries[0].Subject);
+						//printf("%d:%s:%s:\n",msgCount,message_entries[msgCount-1].Sender,message_entries[0].Subject);
 						break;
 					default: 
 					printf("Invalid input. Please try again.\n\n");

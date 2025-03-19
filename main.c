@@ -11,6 +11,8 @@
 #include "Modify_Personal_Contents.c"
 #include "Compose_Message.c"
 #include "Save_Message_File.c"
+#include "Load_Message_File.c"
+#include "Print_Message_File.c"
 //#include "Announcement.c"
 
 

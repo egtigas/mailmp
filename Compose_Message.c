@@ -1,15 +1,17 @@
-//void Compose_Message(String100 tmpUsername, int *msgCount, int ancFlag){
 void Compose_Message(messageTag message_entries[MAX_MSSG_COUNT],String100 tmpUsername, int *msgCount, int ancFlag){
 	//Load message file first
+	int i,j=1,k=0,l=0, dupFlag =0;
 	String100 tmpSubject;
 	String100 tmpMessage;
+	char SendToList[1000];
+	char arrList[MAX_USERS][100];
 	int EndOfMessage=0; //End of Message Flag
 	int numLines=0;
 	
 	fflush(stdin); //To clear garbage	
 	strcpy(tmpSubject,"");
 	strcpy(tmpMessage,"");
-
+	strcpy(SendToList,"");
 	
 	system ("cls");
 	if(ancFlag){
@@ -29,7 +31,7 @@ void Compose_Message(messageTag message_entries[MAX_MSSG_COUNT],String100 tmpUse
 		strcpy(message_entries[*msgCount].Sender,tmpUsername);
 		strcpy(message_entries[*msgCount].Subject,tmpSubject);
 		message_entries[*msgCount].ancFlag=1;
-		message_entries[*msgCount].numOfRecipients=MAX_USERS;
+		message_entries[*msgCount].numOfRecipients=1;
 		strcpy(message_entries[*msgCount].Recipients[0],"ALL_USERS");		
 
 		strcpy(message_entries[*msgCount].strMsgEntries[0],"ANNOUNCEMENT");
@@ -51,8 +53,57 @@ void Compose_Message(messageTag message_entries[MAX_MSSG_COUNT],String100 tmpUse
 		
 		}
 	else {
-		printf("Composing Message for %s\n",tmpUsername);
-		printf("Message Count %d\n",*msgCount);
+		printf("=====================================================\n");
+		printf("                  COMPOSE A MESSAGE\n");
+		printf("Username: %s\n",tmpUsername);
+		printf("Message Count %d\n",*msgCount);		
+		printf("=====================================================\n");		
+		printf("Subject: ");
+		fgets(tmpSubject,sizeof(tmpSubject),stdin);		
+		printf("Send To:\n");
+		for(i=1;i<userCount;i++) {
+			printf("[%d] %s\n",user[i].User_Index,user[i].Username);
+			}
+		printf("%c[%d;%df", 0x1B, 25, 1);
+		printf("Select user number or select 0 to end\n");
+
+
+		scanf("%d",&j);
+		while (j!=0) {		
+			printf("%c[%d;%df", 0x1B, 26, 1);
+			for(i=0;i<k+1;i++) {
+				//printf("%s -- %s\n",arrList[i],user[j].Username);
+				if(strcmp(arrList[i],user[j].Username)==0) {
+					printf("%c[%d;%df", 0x1B, 26, 1);
+					printf("Duplicate\n");
+					dupFlag=1;
+				}
+			}
+			if(dupFlag != 1) {
+				strcpy(arrList[k],user[j].Username);
+				strcat(SendToList,user[j].Username);
+				strcat(SendToList," ");
+				printf("%c[%d;%df", 0x1B, 7, 10);
+				printf("%s\n",SendToList);
+				printf("%c[%d;%df", 0x1B, 26, 1);
+				printf("                 ");
+				printf("%c[%d;%df", 0x1B, 27, 1);
+				printf("                 ");
+				printf("%c[%d;%df", 0x1B, 26, 1);				
+				l++;
+				k++;
+			}
+			dupFlag=0;
+			scanf("%d",&j);
+		}
+
+		
+		//printf("Message Count %d\n",*msgCount);
+		for(i=0;i<k;i++) {
+			printf("Recipients %d-%s\n",i,arrList[i]);
+		}
+
+		system("pause");
 	}
 	
 	

@@ -1,5 +1,12 @@
-main { 
+Global variables
+
+userCount -- number of users in user.txt (includes last new line (?))
+
+main {
     user login {
+		//Login_User loads the user.txt file
+		//Load message file after successful login on User Page
+		//Goes to User Page
         compose message {
 			compose message {}
 			compose annoncement {}
@@ -26,6 +33,7 @@ main {
 		}
         logout {
 			main {}
+			//Message file will only be saved after logout
 			Save_Message_File {}
 		}
     }

@@ -15,7 +15,7 @@ void Save_Message_File(messageTag message_entries[MAX_MSSG_COUNT],int msgCount){
 	{
 
 		// num of entries in your blog array
-		//fprintf(pFile,"%d\n",numPosts);
+		fprintf(file_ptr,"%d\n",msgCount);
 		/*for (i = 0;i < msgCount;i++)
 		{
 			//fprintf (pFile,"%s\n",blog_entries[i].sender);
@@ -25,20 +25,27 @@ void Save_Message_File(messageTag message_entries[MAX_MSSG_COUNT],int msgCount){
 				fprintf (pFile,"%s\n",blog_entries[i].strEntries[j]);
 		}*/
 		
-		fprintf(file_ptr,"%s\n", message_entries[msgCount-1].Sender);
-		fprintf(file_ptr,"%s\n", message_entries[msgCount-1].Subject);
-		fprintf(file_ptr,"%d\n", message_entries[msgCount-1].ancFlag);
-		fprintf(file_ptr,"%d\n", message_entries[msgCount-1].numOfRecipients);
-		fprintf(file_ptr,"%s\n", message_entries[msgCount-1].Recipients[0]);
-		fprintf(file_ptr,"%d\n", message_entries[msgCount-1].numOfMsgLines);
 		
+		for (i = 0;i < msgCount;i++){
+			fprintf(file_ptr,"%s\n", message_entries[i].Sender);
+			fprintf(file_ptr,"%s", message_entries[i].Subject);
+			fprintf(file_ptr,"%d\n", message_entries[i].ancFlag);
+			fprintf(file_ptr,"%d\n", message_entries[i].numOfRecipients);
+			fprintf(file_ptr,"%s\n", message_entries[i].Recipients[0]);
+			fprintf(file_ptr,"%d\n", message_entries[i].numOfMsgLines);
+			for (j = 0;j < message_entries[i].numOfMsgLines;j++) {
+				fprintf (file_ptr,"%s\n", message_entries[i].strMsgEntries[j]);
+			}
+		}
 		//printf("Message Lines %d\n", message_entries[msgCount-1].numOfMsgLines);
 		//system("pause");		
 		
+		/*
 		for (i = 0;i <= msgCount-1;i++){
 			for (j = 0;j < message_entries[i].numOfMsgLines;j++)
 				fprintf (file_ptr,"%s\n", message_entries[i].strMsgEntries[j]);
 		}
+		*/
 		
 		/*printf("%d\n", msgCount);
 		printf("%s\n", message_entries[msgCount-1].Sender);

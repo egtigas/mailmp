@@ -14,6 +14,7 @@ Maximum no. of Characters for Security Questions & Answers: 100
 #define SECURITY_QUESTION_LENGTH 100
 #define SECURITY_ANSWER_LENGTH 100
 #define MAX_LINES 100  // Max lines per message
+#define MESSAGE_FILE "messages.txt"
 
 typedef char String100[101];
 
@@ -66,4 +67,7 @@ void Modify_Account_Security();
 void Modify_Personal_Contents();
 void Compose_Message();
 void Save_Message_File();
+void Load_Message_File();
+void Print_Message_File(); //For debugging only
+int userCount;
 int main();
