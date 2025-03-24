@@ -38,10 +38,10 @@ Subject Fourth
 1
 ALL_USERS
 4
-subject 1 l1
-subject 1 l2
-subject 1 l3
-subject 1 l3
+subject 4 l1
+subject 4 l2
+subject 4 l3
+subject 4 l3
 1
 Subject Fifth
 1

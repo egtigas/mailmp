@@ -46,7 +46,8 @@ int Admin_Delete_Message(User_Details user_entries[MAX_USERS],messageTag message
 			*/
 		}
 	
-		printf("\nDelete which message number (Enter 0 to Go Back): ");
+		printf("\nDelete which message number \n");
+		printf("Did you sure? (Enter 0 to Go Back): \n");
 		scanf("%d", &select);
 		printf("=====================================================\n");
 		select = select-1;
@@ -69,66 +70,55 @@ int Admin_Delete_Message(User_Details user_entries[MAX_USERS],messageTag message
 			}
 			system("pause");
 			system("cls");
-			j=0;
-			for(i=0;i<=msgCount;i++) 
+		
+			for(i=0;i<msgCount;i++) 
 			{
+				if(i>=select) 
+				{
+					//printf("-----\n");
+					//printf("Delete %d %s %s\n",i+1,message_entries[i].Sender,message_entries[i].Subject);
+					//printf("Move %d to %d %s %s\n",i+2,i+1,message_entries[i+1].Sender,message_entries[i+1].Subject);
+					//Replace message deleted with next in line
+					strcpy(message_entries[i].Sender,message_entries[i+1].Sender);
+					strcpy(message_entries[i].Subject,message_entries[i+1].Subject);
+					message_entries[i].ancFlag = message_entries[i+1].ancFlag; 
+					message_entries[i].numOfRecipients = message_entries[i+1].numOfRecipients;
+					for(j=0;j<message_entries[i].numOfRecipients;j++) 
+					{
+						strcpy(message_entries[i].Recipients[j],message_entries[i+1].Recipients[j]);
+					}
+					message_entries[i].numOfMsgLines = message_entries[i+1].numOfMsgLines;
+					for(j=0;j<message_entries[i].numOfMsgLines;j++) 
+					{
+						strcpy(message_entries[i].strMsgEntries[j],message_entries[i+1].strMsgEntries[j]);
+					}					
+					//printf("-----\n");
+					
+				}
+				/* Visual representation
 				if(i<select) 
 				{
-					printf("Ignore %d %s %s\n",i,message_entries[i].Sender,message_entries[i].Subject);
+					printf("Ignore %d %s %s\n",i+1,message_entries[i].Sender,message_entries[i].Subject);
 					j++;
 				}
-				else if(i==select) 
+				else if(i>=select) 
 				{
-					printf("Skip %d %s %s\n",i,message_entries[i].Sender,message_entries[i].Subject);
-				}
-				else
-				{
-					printf("Move %d to %d %s %s\n",i,j,message_entries[j].Sender,message_entries[j].Subject);
+					printf("-----\n");
+					printf("Delete %d %s %s\n",i+1,message_entries[i].Sender,message_entries[i].Subject);
+					printf("Move %d to %d %s %s\n",i+2,i+1,message_entries[i+1].Sender,message_entries[i+1].Subject);
+					printf("-----\n");
 					j++;
 				}
+				*/ 
+
+
 			}
+			msgCount--;
 		}
-		/*
-		for(j=0;j<k;j++)
-		{
-			if(select==num[j] && count==0)
-			{
-				if(select>-1)
-				{
-					printf("> From: %s\n", message_entries[select].Sender);
-					printf("> To:\n");
-					for(l=0;l<message_entries[select].numOfRecipients;l++)
-					{
-						printf("%s\t\t", message_entries[select].Recipients[l]);
-						for(m=0;m<usrCount;m++) 
-						{
-							if(strcmp(message_entries[select].Recipients[l], user[m].Username)==0)
-							{
-								printf("%s\n", user[m].Full_Name);
-							}
-						}
-					}
-					printf("\n> Subject: %s\n", message_entries[select].Subject);
-					for(i=0;i<message_entries[select].numOfMsgLines;i++)
-					{
-						printf("%s\n", message_entries[select].strMsgEntries[i]);
-					}
-					count = 1;
-					system("pause");
-					system("cls");
-					printf("=====================================================\n");
-					//TEST
-					//strcpy(message_entries[select].Subject,"Arithmetic");
-				}
-			}
-		}
-		*/
-		
-		
-		
+
 	}
 
-	return 1;
+	return msgCount;
 
 
 

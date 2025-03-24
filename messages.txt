@@ -1,26 +1,4 @@
-8
-Sender Sidney
-Subject First Announcement
-1
-1
-ALL_USERS
-4
-subject 1 l1
-subject 1 l2
-subject 1 l3
-subject 1 l3
-Sender Meow
-Subject Second Announcement
-1
-1
-ALL_USERS
 6
-subject 2 L1
-subject 2 L2
-subject 2 L3
-subject 2 L4
-subject 2 L5
-subject 2 L6
 Sender Juan
 Subject Third Message
 0

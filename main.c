@@ -22,6 +22,7 @@
 #include "Change_Admin_Password.c"
 #include "View_Sent_Messages.c"
 #include "View_Inbox.c"
+#include "Reply_Message.c"
 #include "Admin_Messages_Page.c"
 #include "Admin_View_Message.c"
 #include "Admin_Delete_Message.c"

@@ -86,6 +86,7 @@ void Save_User_File();
 void Change_Admin_Password();
 void View_Sent_Messages();
 void View_Inbox();
+void Reply_Message();
 void Admin_Messages_Page();
 void Admin_View_Message();
 int Admin_Delete_Message();

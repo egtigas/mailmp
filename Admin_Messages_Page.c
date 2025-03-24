@@ -33,7 +33,11 @@ void Admin_Messages_Page(User_Details user_entries[MAX_USERS],messageTag message
 				switch(choice)
 				{
 					case 1:
-						Admin_Delete_Message(user_entries,message_entries,*msgCount,*usrCount);
+						if(*msgCount==0) 
+						{
+							printf("\nI'm sorry you deleleted all messages, nothing left to delete!!!\n\n");
+						}
+						else *msgCount = Admin_Delete_Message(user_entries,message_entries,*msgCount,*usrCount);
 						break;
 					case 2:
 						printf("Select %d\n",choice);
@@ -52,5 +56,6 @@ void Admin_Messages_Page(User_Details user_entries[MAX_USERS],messageTag message
 				}
 				
 			}
-			while(flag == 0); 
+			while(flag == 0);
+
 }

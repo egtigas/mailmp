@@ -79,6 +79,7 @@ void Admin_Page(){
 					case 4: 
 						flag = 1; //exit
 						printf("Select %d\n",choice);
+						//Save to Message File upon exit of Admin Module
 						Save_Message_File(message_entries,msgCount);
 						break;	
 					default: 
