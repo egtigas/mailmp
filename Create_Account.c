@@ -1,115 +1,106 @@
+
+/*************************************************************************************
+
+	Create_Account() function allows the user to create an account which will
+	require them to input their username, full name, password, security question 
+	and answer, and description.
+
+***************************************************************************************/
+
 void Create_Account()
 {
-	//fprintf(file,"%s\n","hello");
 	
 	int i;
-	int index = 1;
-	char row[1000];
-	char delimiter[] = ";";
-	strcpy(row,"");
+	int index, notFound;
+	char Security_Question[100];
 	
-	FILE *file_pointer;
-	
-	file_pointer = fopen("user.txt", "rt");
-	
-	// This gets the index of the user file. It counts how many rows there are (eg. 2 rows) so the index counts as 2 users.
-	// fgets() opens the file.
-	// strtok() separates / identifies the user through the delimiter ";".
-	while(fgets(row,sizeof(row),file_pointer)){
-			strcpy(user[index].Username,strtok(row, delimiter));
-			index++;
-	}
+	Load_Users(&index); //accesses the details in user.txt file
 	
 	/***********************
 	Information will be sent to user.txt file
 	************************/
 	
-	fclose(file_pointer);
+	fflush(stdin);
 	
-	file_pointer = fopen("user.txt", "at");
-    if(file_pointer == NULL)
-    {
-        printf("Error opening file\n");
-        exit(1);
-    }
+	printf("=====================================================\n");
+	printf("                   CREATE ACCOUNT                    \n");
+	printf("=====================================================\n");
+	
+	if(index <= 30) // This makes sure that the registered users dont exceed 30.
+	{
+		notFound = 0; //determines if username already exists among the registered users
+	
+		do
+		{
+			printf("Input username: ");
+			fgets(user[index].Username, sizeof(user[index].Username), stdin);
+			user[index].Username[strcspn(user[index].Username, "\n")] = '\0';
+			
+			for(i = 0; i < index; i++)
+			{
+				if(strcmp(user[index].Username, user[i].Username) == 0)
+				{
+					//if the username inputted by the user is already taken by another user
+					printf("USERNAME HAS BEEN TAKEN\n"); 
+				}
+				else
+				{
+					//if username is unique
+					notFound = 1;
+				}
 
-
-	fflush(stdin); //To clear garbage
-	
-	// This makes sure that the registered users dont exceed 30.
-	if(index <= 30){
-	
-	strcpy(row, "");
-	
-	printf("Username: ");
-	gets(user[index].Username);
-
-	// Checks if username is unique.
-	for(i=0;i<index;i++){
-		while(strcmp(user[index].Username, user[i].Username)==0){
-			printf("USERNAME HAS BEEN TAKEN\n");
-			printf("Username: ");
-			gets(user[index].Username);
+			}
 		}
+		while(notFound == 0); //will keep prompting the user for their username until they input a unique username
+		
+		
+	/***** FULL NAME *****/	
+	
+		printf("Input full name: ");
+		fgets(user[index].Full_Name, sizeof(user[index].Full_Name), stdin);
+		user[index].Full_Name[strcspn(user[index].Full_Name, "\n")] = '\0';
+		
+		
+	/**** PASSWORD ****/	
+	
+		printf("Input password: ");
+		fgets(user[index].Password, sizeof(user[index].Password), stdin);
+		user[index].Password[strcspn(user[index].Password, "\n")] = '\0';
+		
+		// cyphers password by +1 to the character in ASCII
+		for(i=0; i<strlen(user[index].Password); i++){
+			user[index].Password[i] = user[index].Password[i]+1;
+		}
+		
+	/**** SECURITY QUESTION ****/
+	
+		printf("Input any security question (ex. What is your favorite color?): ");
+		fgets(Security_Question, sizeof(Security_Question), stdin);
+		Security_Question[strcspn(Security_Question, "\n")] = '\0';
+	
+	/**** SECURITY ANSWER ****/
+	
+		printf("Input security answer: ");
+		fgets(user[index].Security_Answer, sizeof(user[index].Security_Answer), stdin);
+		user[index].Security_Answer[strcspn(user[index].Security_Answer, "\n")] = '\0';
+		
+	/**** DESCRIPTION ****/
+	
+		strcpy(user[index].Description, "DEFAULT USER"); //initializes it to a default description
+		
+	/**** ACCOUNT STATUS ****/
+		strcpy(user[index].Account_Status, "UNLOCKED"); //initialies the user's account as unlocked
+		
+		index++; //increments the index of the total number of users
+		
+		Save_User_File(index); //adds the new user and their details to the user text file 
+		
 	}
-	
-	strcat(row,user[index].Username);
-	strcat(row,";");
-	
-/***** FULL NAME *****/	
-
-	printf("Full Name: ");
-	gets(user[index].Full_Name);
-	
-	strcat(row,user[index].Full_Name);
-	strcat(row,";");
-	
-/**** PASSWORD ****/	
-
-	printf("Password: ");
-	gets(user[index].Password);
-	
-	// cyphers password by +1 to the character in ASCII
-	for(i=0; i<strlen(user[index].Password); i++){
-		user[index].Password[i] = user[index].Password[i]+1;
+	else 
+	{
+		printf("SORRY\n WE HAVE EXCEEDED MAX USERS\n"); //if the total number of users has exceeded 30
 	}
-	
-	strcat(row,user[index].Password);
-	strcat(row,";");
-	
-/**** SECURITY QUESTION ****/
-
-	printf("Security_Question: ");
-	gets(user[index].Security_Question);
-	
-	strcat(row,user[index].Security_Question);
-	strcat(row,";");
-	
-/**** SECURITY ANSWER ****/
-
-	printf("Security_Answer: ");
-	gets(user[index].Security_Answer);
-	
-	strcat(row,user[index].Security_Answer);
-	strcat(row,";");
-	
-/**** DESCRIPTION ****/
-	
-	strcpy(user[index].Description, "DEFAULT USER");
-	strcat(row,user[index].Description);
-	strcat(row,";");
-	strcat(row,"\n");
-	printf("\nACCOUNT SUCESSFULLY CREATED\n\n");
-	
-	}
-	
-	else printf("SORRY\n WE HAVE EXCEEDED MAX USERS\n");
-	
-/**** ROW ****/
-
-	//printf("ROW %s\n",row);
-	fwrite(&row, strlen(row), 1, file_pointer);
-
-    fclose(file_pointer);
+		
+	printf("=====================================================\n");
 
 }

@@ -15,6 +15,7 @@ Maximum no. of Characters for Security Questions & Answers: 100
 #define SECURITY_ANSWER_LENGTH 100
 #define MAX_LINES 100  // Max lines per message
 #define MESSAGE_FILE "messages.txt"
+#define USER_FILE "user.txt"
 
 typedef char String100[101];
 
@@ -40,14 +41,21 @@ struct User_Details
 	char Security_Question[100];
     char Security_Answer[50];
 	char Description[100];
+	char Connections[10][100];
+	int num_Connections;
+	char Account_Status[20];
 } user[MAX_USERS];
 
+typedef struct User_Details User_Details;
+
+/*
 struct Announcement_Details
 {
 	char Sender[100];
 	char Subject[100];
 	char Message[MAX_MSSG_CHAR];
 } Announcement[MAX_MSSG_COUNT];
+*/
 
 // Common functions
 void clean(String100 strTemp)
@@ -65,9 +73,21 @@ void Browse_Users();
 void forgot_password();
 void Modify_Account_Security();
 void Modify_Personal_Contents();
+void Modify_Personal_Connections();
 void Compose_Message();
 void Save_Message_File();
 void Load_Message_File();
+void Load_User_File();
 void Print_Message_File(); //For debugging only
-int userCount;
+void View_Annoucements();
+void Admin_User_Page();
+void Load_Users();
+void Save_User_File();
+void Change_Admin_Password();
+void View_Sent_Messages();
+void View_Inbox();
+void Admin_Messages_Page();
+void Admin_View_Message();
+int Admin_Delete_Message();
+//int userCount; // fix?
 int main();

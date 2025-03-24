@@ -2,6 +2,7 @@ void Login_User(){
 
 	int j=0,k=0;
 	int index = 1, match = 0;
+	int userCount;
 	char row[1000];
 	char Enter_Username[100];
 	char Enter_Password[PASSWORD_LENGTH];
@@ -51,7 +52,7 @@ void Login_User(){
 							}
 							if(strcmp(user[j].Password, Enter_Password)==0){ // if username and password are VALID, it brings user into the User Page.
 								fclose(file_pointer);
-								User_Page(j,&userCount);
+								User_Page(j,userCount);
 							}
 							
 							else{ // prints if the input password doesnt exist.

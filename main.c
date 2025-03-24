@@ -9,19 +9,28 @@
 #include "forgot_password.c"
 #include "Modify_Account_Security.c"
 #include "Modify_Personal_Contents.c"
+#include "Modify_Personal_Connections.c"
+#include "File_Operations.c"
 #include "Compose_Message.c"
 #include "Save_Message_File.c"
 #include "Load_Message_File.c"
 #include "Print_Message_File.c"
-//#include "Announcement.c"
-
-
-//struct User_Details user;
-
+#include "Admin_Page.c"
+#include "Load_User_File.c"
+#include "View_Announcements.c"
+#include "Admin_User_Page.c"
+#include "Change_Admin_Password.c"
+#include "View_Sent_Messages.c"
+#include "View_Inbox.c"
+#include "Admin_Messages_Page.c"
+#include "Admin_View_Message.c"
+#include "Admin_Delete_Message.c"
 
 int main()
 {
 	int choice;
+	
+	
 	system("cls");
 	do
 	{
@@ -47,6 +56,7 @@ int main()
 				forgot_password();
 				break;
 			case 4: 
+				Admin_Page();
 			default: 
 				printf("Invalid input. Please try again.\n\n");
 		}

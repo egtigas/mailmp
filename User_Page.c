@@ -1,13 +1,14 @@
-void User_Page(int user_index){
+void User_Page(int user_index,int userCount){
 	
 	int choice, choice2;
 	//char opt='1';
+	
+	
 	int msgCount=0; //Count of messages and announcements
-
-
-	//printf("USERPAGE: Start %d\n",userCount);	
+	
+	printf("USERPAGE: Start %d\n",userCount);	
 	//malloc(MAX_MSSG_COUNT * sizeof(message_entries));
-
+	
 	//messageTag message_entries[1000]; //Array of all messages from all users	
 	struct messageTag *message_entries = (struct messageTag *)malloc(MAX_MSSG_COUNT * sizeof(struct messageTag));
 	if (message_entries == NULL) {
@@ -16,6 +17,9 @@ void User_Page(int user_index){
 	
 	//Load message file
 	Load_Message_File(message_entries,&msgCount);
+	//
+	
+	
 
 	//*********	
 	//Debug only check if messages are loaded in memory
@@ -62,11 +66,11 @@ void User_Page(int user_index){
 				switch(choice2){
 					case 1:
 						//Compose_Message(user[user_index].Username,&msgCount,0);
-						Compose_Message(message_entries,user[user_index].Username,&msgCount,0);						
+						Compose_Message(message_entries,user[user_index].Username,&msgCount,0,userCount);						
 						printf("Exit from Compose Message.\n\n");					
 						break;
 					case 2:
-						Compose_Message(message_entries,user[user_index].Username,&msgCount,1);
+						Compose_Message(message_entries,user[user_index].Username,&msgCount,1,userCount);
 						printf("Exit from Compose Announcement.\n\n");
 						//printf("%d:%s:%s:\n",msgCount,message_entries[msgCount-1].Sender,message_entries[0].Subject);
 						break;
@@ -76,10 +80,13 @@ void User_Page(int user_index){
 				
 				break;
 			case 2: 
+				View_Inbox(message_entries,&msgCount,user_index,userCount);
 				break;
-			case 3: 
+			case 3:
+				View_Sent_Messages(message_entries,&msgCount,user_index,userCount);
 				break;
 			case 4: 
+				View_Annoucements(message_entries,&msgCount,user_index);
 				break;
 			case 5:
 				Modify_Personal_Contents(user_index);
@@ -88,6 +95,7 @@ void User_Page(int user_index){
 				Modify_Account_Security(user_index);
 				break;
 			case 7: 
+				Modify_Personal_Connections(user_index);
 				break;
 			case 8: 
 				Browse_Users(user_index);

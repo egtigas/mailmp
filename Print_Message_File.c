@@ -3,10 +3,10 @@ void Print_Message_File(messageTag message_entries[MAX_MSSG_COUNT], int *msgCoun
 
 	//Debug only
 	printf("*********************************\n");
-	printf("Message count from Load_Message is %d\n",msgCount);
+	printf("Message count from Load_Message is %d\n",*msgCount);
 	for(i=0;i<*msgCount;i++) {
 		printf("*********************************\n");
-		printf("Message No %d of %d\n", i+1, msgCount);
+		printf("Message No %d of %d\n", i+1, *msgCount);
 		printf("Sender:%s\n", message_entries[i].Sender);
 		printf("Subject:%s\n", message_entries[i].Subject);
 		printf("Announcement Flag:%d\n", message_entries[i].ancFlag);
@@ -23,4 +23,5 @@ void Print_Message_File(messageTag message_entries[MAX_MSSG_COUNT], int *msgCoun
 		}
 		
 	}
+	system("pause");
 }

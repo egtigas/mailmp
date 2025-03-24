@@ -1,3 +1,24 @@
+void Modify_Full_Name(int user_index)
+{
+	char Enter_Modified_Name[100];
+	
+	printf("Enter new full name: ");
+	fgets(Enter_Modified_Name, sizeof(Enter_Modified_Name), stdin);
+	Enter_Modified_Name[strcspn(Enter_Modified_Name, "\n")] = '\0'; 
+	
+	strcpy(user[user_index].Full_Name, Enter_Modified_Name);
+}
+
+void Modify_Description(int user_index)
+{
+	char Enter_Modified_Description[100];
+	
+	printf("Enter new description: ");
+	fgets(Enter_Modified_Description, sizeof(Enter_Modified_Description), stdin);
+	Enter_Modified_Description[strcspn(Enter_Modified_Description, "\n")] = '\0'; 
+	
+	strcpy(user[user_index].Description, Enter_Modified_Description);
+}
 void Modify_Personal_Contents(int user_index)
 {
 	//int choice: User input on which personal content to modify (Full name or Description)
@@ -5,17 +26,10 @@ void Modify_Personal_Contents(int user_index)
 	//Enter_Modified_Name and Enter_Description: stores the newly modified content
 	
 	
-	int choice, i = 1, flag_Name = 0, flag_Description = 0; 
-	char row[10000];
+	int choice, Total_User_Index;
 	
-	char Enter_Modified_Name[100];
-	char Enter_Description[100];
 	
-	FILE *user_file;
-	FILE *temp_file;
-	
-	user_file = fopen("user.txt", "r"); 
-	temp_file = fopen("temp.txt", "w");
+	Load_Users(&Total_User_Index);
 	
 	printf("[1] Full Name\n[2] Description\n");
 	printf("Input choice to modify: ");
@@ -24,50 +38,19 @@ void Modify_Personal_Contents(int user_index)
 
 	if(choice == 1) //if user chooses to modify their Full name
 	{
-		printf("Enter updated full name: ");
-		fgets(Enter_Modified_Name, sizeof(Enter_Modified_Name), stdin);
-		Enter_Modified_Name[strcspn(Enter_Modified_Name, "\n")] = '\0'; 
-		flag_Name = 1; 
+		Modify_Full_Name(user_index);
 	}
 	else if(choice == 2) //if user chooses to modify their Description
 	{
-		printf("Enter updated description: ");
-		fgets(Enter_Description, sizeof(Enter_Description), stdin);
-		Enter_Description[strcspn(Enter_Description, "\n")] = '\0';
-		flag_Description = 1;
+		Modify_Description(user_index);
 	}
-
-	while(fgets(row, sizeof(row), user_file) != NULL) //looks for user's row of details
-	{
-		if(user_index == i) //once the user is found, it will replace the certain content that they modified and store it in a temporary file
-		{
-			if(flag_Name) //modifies the user full name 
-			{
-				strcpy(user[i].Full_Name, Enter_Modified_Name);
-				fprintf(temp_file, "%s;%s;%s;%s;%s;\n", user[i].Username, user[i].Full_Name, user[i].Password, user[i].Security_Answer, user[i].Description);
-			}
-			else if(flag_Description) //modifies the user description
-			{
-				strcpy(user[i].Description, Enter_Description);
-				fprintf(temp_file, "%s;%s;%s;%s;%s;\n", user[i].Username, user[i].Full_Name, user[i].Password, user[i].Security_Answer, user[i].Description);
-			}
-		}
-		else
-		{
-			
-			fputs(row, temp_file); //if user is not found yet, it will copy the contents of the user text file to a temporary file
-		}
-		i++;
-	}
-	//reset the flag variables
-	flag_Name = 0; 
-	flag_Description = 0;
 	
-	fclose(user_file); 
-	fclose(temp_file);
+	Save_User_File(Total_User_Index);
+	system("cls");
 	
-	remove("user.txt"); //delete the original file 
-	rename("temp.txt", "user.txt"); //replace it with the temporary file and rename it "user.txt"
-		
+	printf("=====================================================\n");
+	printf("Successfully updated!\n");
+	printf("=====================================================\n");
+	
 	
 }

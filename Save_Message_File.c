@@ -1,5 +1,6 @@
 void Save_Message_File(messageTag message_entries[MAX_MSSG_COUNT],int msgCount){
 	printf("Entering Save Messages to File Function %d\n",msgCount);
+	//Print_Message_File(message_entries,msgCount);
 	//system("pause");
 	
 	//FILE *ptr_File = fopen(FILENAME,"wt");
@@ -28,10 +29,12 @@ void Save_Message_File(messageTag message_entries[MAX_MSSG_COUNT],int msgCount){
 		
 		for (i = 0;i < msgCount;i++){
 			fprintf(file_ptr,"%s\n", message_entries[i].Sender);
-			fprintf(file_ptr,"%s", message_entries[i].Subject);
+			fprintf(file_ptr,"%s\n", message_entries[i].Subject);
 			fprintf(file_ptr,"%d\n", message_entries[i].ancFlag);
 			fprintf(file_ptr,"%d\n", message_entries[i].numOfRecipients);
-			fprintf(file_ptr,"%s\n", message_entries[i].Recipients[0]);
+			for (j = 0;j < message_entries[i].numOfRecipients;j++) {
+				fprintf(file_ptr,"%s\n", message_entries[i].Recipients[j]);
+			}
 			fprintf(file_ptr,"%d\n", message_entries[i].numOfMsgLines);
 			for (j = 0;j < message_entries[i].numOfMsgLines;j++) {
 				fprintf (file_ptr,"%s\n", message_entries[i].strMsgEntries[j]);

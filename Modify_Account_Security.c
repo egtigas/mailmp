@@ -1,6 +1,6 @@
 void Modify_Account_Security(int user_index){
 	
-	int select, num, i, match = 0, run = 0, index = 1;
+	int select, i, match = 0, run = 0, index = 1;
 	char old_password[PASSWORD_LENGTH];
 	char new_password1[PASSWORD_LENGTH];
 	char new_password2[PASSWORD_LENGTH];
@@ -31,6 +31,8 @@ void Modify_Account_Security(int user_index){
 	printf("Search by: ");
 	scanf("%d", &select);
 	
+// USE SYSTEM PAAAAAUUUUUUUUUUUUUUUUUSEEEEEEEEEEEEEEEEEEE
+
 /*********
 CHANGE PASSWORD
 
@@ -78,6 +80,8 @@ into the temporary one, except for the user's row, which we have to change.
 						strcat(row, user[user_index].Full_Name);
 						strcat(row, ";");
 						strcat(row, new_password1); // we replace the user[user_index].Password with the new password
+						strcat(row, ";");
+						strcat(row, user[user_index].Security_Question);
 						strcat(row, ";");
 						strcat(row, user[user_index].Security_Answer);
 						strcat(row, ";");
@@ -130,6 +134,8 @@ Exact same logic as change password, but with the security answer instead.
 					strcat(row, ";");
 					strcat(row, user[user_index].Password);
 					strcat(row, ";");
+					strcat(row, user[user_index].Security_Question);
+					strcat(row, ";");
 					strcat(row, new_answer1);
 					strcat(row, ";");
 					strcat(row, user[user_index].Description);
@@ -149,6 +155,5 @@ Exact same logic as change password, but with the security answer instead.
 			printf("MISMATCH OF NEW SECURITY ANSWER");
 	}
 	
-	printf("\nEnter Any Key to Go Back ");
-	scanf(" %d", &num);
+	system("pause");
 }

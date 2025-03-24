@@ -1,8 +1,12 @@
-catluvr;sidney tigas;23456;ph;DEFAULT USER;
-dogluvr;sydney tigas;567;color?;yellow;DEFAULT USER;
-sidney;sidnoy;bcd;seedney;DEFAULT USER;
-1;1;2;1;1;DEFAULT USER;
-aa;aa;bb;1;1;DEFAULT USER;
-pikmin;olimar;234;red pikmin;i love pikmin;
-jill;jillianne robin leung;234;w;DEFAULT USER;
-euhnre;Ian Lopez;op;DEFAULT USER;hi guys;
+catluvr;meow tigas;23456;address;ph;DEFAULT USER;UNLOCKED
+dogluvr;arf-arf tigas;567;color;yellow;DEFAULT USER;UNLOCKED
+sidney;sidnoy;bcd;school;lasal;DEFAULT USER;UNLOCKED
+1;one;2;1;i am a number;UNLOCKED;dogluvr;testing;two
+aa;aa;bb;1;1;DEFAULT USER;UNLOCKED;catluvr;1
+pikmin;olimar;234;red pikmin;i love pikmin;UNLOCKED
+jill;jillianne robin leung;234;w;DEFAULT USER;UNLOCKED
+euhnre;Ian Lopez;op;DEFAULT USER;hi guys;UNLOCKED
+jajajad12;Jasmine Fatima S. Diana;Npojvvv;Chocolate ;She said vroom vroom! kachow;UNLOCKED
+test;i am test;uftu;testing;yes!;UNLOCKED
+two;three;gpvs;five;seven;i am number;UNLOCKED
+testing;test;234;1;DEFAULT USER;UNLOCKED;catluvr;dogluvr
