@@ -1,4 +1,4 @@
-void Reply_Message(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int *user_index,int index, int *num)
+void Reply_Message(messageTag message_entries[MAX_MSSG_COUNT],int msgCount,int user_index,int index, int num)
 {
 	int k=0;
 	
@@ -14,7 +14,7 @@ void Reply_Message(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int 
 	printf("                  COMPOSE YOUR REPLY\n");
 	printf("=====================================================\n");		
 	
-	//printf("mssg_count %d; user_index %d; index %d; num %d", *msgCount, *user_index, index, *num);
+	printf("mssg_count %d; user_index %d; index %d; num %d", msgCount, user_index, index, num);
 	
 	printf("Subject: ");
 	fgets(tmpSubject,sizeof(tmpSubject),stdin);	
@@ -69,7 +69,7 @@ void Reply_Message(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int 
 		scanf("%d",&j);
 	}
 	*/
-	
+	/*
 	//Updated this
 	//strcpy(message_entries[*msgCount].Sender,user[user_index].Username);
 	strcpy(message_entries[*msgCount].Sender,user[*user_index].Username);
@@ -94,6 +94,6 @@ void Reply_Message(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int 
 
 	(*msgCount)++;		
 	Print_Message_File(message_entries,msgCount);
-	
+	*/
 	system("pause");
 }

@@ -80,9 +80,8 @@ void Filter_Users(int index, int *match)
 
 ****************************************************************************************/
 
-void Select_User(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int user_index,int *num, int index)
+void Select_User(int *num, int index)
 {
-	int reply; //user input (1 = message, 0 = back)
 	do //will keep asking for user input until it is valid
     {
         printf("\nSelect User (Enter 0 to Go Back): "); //the user will input the user they are trying to find 
@@ -101,17 +100,6 @@ void Select_User(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int us
             printf("Username: %s\n", user[*num].Username);
             printf("Full Name: %s\n", user[*num].Full_Name);
             printf("Description: %s\n", user[*num].Description);
-			
-			printf("[1] Message\n");
-			printf("[0] Back\n");
-			printf("Input: ");
-			scanf("%d", &reply); //asks for user input
-			if(reply==1)
-			{
-				printf("Browse User:msgCount:%d user_index:%d index:%d num:%d\n",*msgCount,user_index,index,*num);
-				Reply_Message(message_entries,*msgCount,user_index,index,*num);
-				// struct for mssg, msg count, index of logged in user, total users, choice
-			}
         }
     } while (*num < 0 || *num >= index);  
 }
@@ -125,7 +113,7 @@ void Select_User(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int us
 
 ****************************************************************************************/
 
-void Browse_Users(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int user_index){
+void Browse_Users(int user_index){
 	
 	int num=1, index = 1, match;
 	int select;
@@ -152,9 +140,10 @@ void Browse_Users(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int u
     {
         do //continues to ask user to select a username, until input is valid
         {
-            printf("Browse User:user_index:%d\n",user_index);
-			Select_User(message_entries,msgCount,user_index,&num, index); //user chooses from the list of usernames
+            Select_User(&num, index); //user chooses from the list of usernames
         } 
 		while (num > 0);
     }
+
+
 }

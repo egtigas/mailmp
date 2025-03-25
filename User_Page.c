@@ -98,7 +98,8 @@ void User_Page(int user_index,int userCount){
 				Modify_Personal_Connections(user_index);
 				break;
 			case 8: 
-				Browse_Users(user_index);
+				//Browse_Users(user_index);
+				Browse_Users(message_entries,&msgCount,user_index);
 				break;
 			case 9:
 				//Close and save message file

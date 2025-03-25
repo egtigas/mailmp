@@ -108,8 +108,7 @@ void Select_User(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int us
 			scanf("%d", &reply); //asks for user input
 			if(reply==1)
 			{
-				printf("Browse User:msgCount:%d user_index:%d index:%d num:%d\n",*msgCount,user_index,index,*num);
-				Reply_Message(message_entries,*msgCount,user_index,index,*num);
+				Reply_Message(message_entries,&msgCount,user_index,index,&num);
 				// struct for mssg, msg count, index of logged in user, total users, choice
 			}
         }
@@ -152,8 +151,7 @@ void Browse_Users(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount,int u
     {
         do //continues to ask user to select a username, until input is valid
         {
-            printf("Browse User:user_index:%d\n",user_index);
-			Select_User(message_entries,msgCount,user_index,&num, index); //user chooses from the list of usernames
+            Select_User(message_entries,msgCount,user_index,&num, index); //user chooses from the list of usernames
         } 
 		while (num > 0);
     }
