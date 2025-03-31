@@ -18,3 +18,13 @@ C Programming Tutorial 72, "Editing" a Text File
 https://www.youtube.com/watch?v=2pBVlpLM1Sc
 
 
+
+A maximum of 10 points may be given for features over & above the requirements (such as mouse
+control, graphics, notifications of unread messages, background music (*) etc., or other features not
+conflicting with the given requirements or changing the requirements) subject to evaluation of the
+teacher. Required features must be completed first before bonus features are credited. Note that use
+of advanced C commands/statements may not necessarily merit bonuses.
+
+(*) Background Music considered for bonus should be either “Precious Stars in the Sky”, “A Twinkle in
+the Sky”, or “Sky of Wonder”
+

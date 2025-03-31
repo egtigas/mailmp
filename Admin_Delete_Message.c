@@ -98,13 +98,4 @@ int Admin_Delete_Message(User_Details user_entries[MAX_USERS],messageTag message
 	}
 
 	return msgCount;
-
-
-
-
-	
-	
-	
-	
-	
 }

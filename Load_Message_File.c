@@ -1,3 +1,21 @@
+
+/*********************************************************************************
+	Load_Message_File() function reads the messages from the text file
+	and stores them to message_entires array.
+
+	Order of the text file will be:
+
+	1. total number of messages from all users
+	2. username of sender
+	3. subject of message
+	4. flag (1 = announcement, 0 = personal/group message)
+	5. number of recipients
+	6. username of recipient/s
+	7. number of message lines
+	8. contents of the message
+
+************************************************************************************/	
+
 void Load_Message_File(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount){
 
 	String100 tmpString;
@@ -10,54 +28,47 @@ void Load_Message_File(messageTag message_entries[MAX_MSSG_COUNT],int *msgCount)
 	{
 		/* Read the number of posts */
 		fgets(tmpString,sizeof(tmpString),file_ptr);
-		*msgCount = atoi(tmpString); // ascii to int
+		*msgCount = atoi(tmpString); // initializes the string digit value to an integer
 		
 		//Load the messages
 		for (i = 0;i < *msgCount;i++)
 		{
 			// Read no. of lines for that entry:
 			//Read message sender
-			//printf("---- Reading message %d of %d\n",i+1,*msgCount);
 			fgets(tmpString,sizeof(tmpString),file_ptr);
 			clean(tmpString);
-			//printf("Load_Message_File: Sender %s\n",tmpString);			
+						
 			strcpy(message_entries[i].Sender,tmpString);
 			
 			//Read message subject
 			fgets(tmpString,sizeof(tmpString),file_ptr);
-			//printf("Load_Message_File: Subject %s\n",tmpString);
+			
 			clean(tmpString);			
 			strcpy(message_entries[i].Subject,tmpString);
 			
 			fgets(tmpString,sizeof(tmpString),file_ptr);
-			//printf("Load_Message_File: ancFlag %s\n",tmpString);
 			k = atoi(tmpString);			
 			message_entries[i].ancFlag = k;
 
 			fgets(tmpString,sizeof(tmpString),file_ptr);
-			//printf("Load_Message_File: Recipients %s\n",tmpString);
 			k = atoi(tmpString);			
 			message_entries[i].numOfRecipients = k;
 			
 			//Loading the recipients of this message
 			for(j=0;j<k;j++){
 				fgets(tmpString,sizeof(tmpString),file_ptr);
-				clean(tmpString);
-				//printf("Load_Message_File: Recipient %d is %s\n",j+1,tmpString);			
+				clean(tmpString);		
 				strcpy(message_entries[i].Recipients[j],tmpString);
 			}
 			
 			fgets(tmpString,sizeof(tmpString),file_ptr);
-			//printf("Load_Message_File: No of Message Lines %s\n",tmpString);
 			k = atoi(tmpString);			
 			message_entries[i].numOfMsgLines = k;
-			//printf("Load_Message_File: No of Message Lines %d\n",k);
 			
 			//Loading the message lines
 			for(j=0;j<k;j++){
 				fgets(tmpString,sizeof(tmpString),file_ptr);
-				clean(tmpString);
-				//printf("Load_Message_File: Recipient %d is %s\n",j+1,tmpString);			
+				clean(tmpString);			
 				strcpy(message_entries[i].strMsgEntries[j],tmpString);
 			}			
 		}

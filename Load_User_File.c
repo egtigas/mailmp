@@ -16,6 +16,7 @@ void Load_User_File(User_Details user_entries[MAX_USERS],int *usrCount){
 			strcpy(user_entries[index].Security_Question, strtok(NULL, delimiter));
 			strcpy(user_entries[index].Security_Answer, strtok(NULL, delimiter));
 			strcpy(user_entries[index].Description, strtok(NULL, delimiter));
+			strcpy(user_entries[index].Account_Status, strtok(NULL, delimiter));
 			index++;
 		}
 	

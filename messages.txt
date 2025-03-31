@@ -1,85 +1,73 @@
-8
-Sender Sidney
-Subject First Announcement
-1
-1
-ALL_USERS
-4
-subject 1 l1
-subject 1 l2
-subject 1 l3
-subject 1 l3
-Sender Meow
-Subject Second Announcement
+6
+XxSidneyxX
+Happy Birthday Gab!
 1
 1
 ALL_USERS
 6
-subject 2 L1
-subject 2 L2
-subject 2 L3
-subject 2 L4
-subject 2 L5
-subject 2 L6
-Sender Juan
-Subject Third Message
-0
-2
-juan
-pedro
-4
-subject 3 l1
-subject 3 l2
-subject 3 l3
-subject 3 l3
-Sender Sidney
-Subject Fourth
-0
-1
-ALL_USERS
-4
-subject 4 l1
-subject 4 l2
-subject 4 l3
-subject 4 l3
-1
-Subject Fifth
+HAPPY 19TH BIRTHDAY!
+Hope you had a great day today
+and recieved good gifts <3
+
+Sincerely,
+Sidnoy
+jajajad12
+Gab Leveled Up?!
 1
 1
 ALL_USERS
 3
-this is
-a test for announcement
-NED
-1
-Subject Sixth
-0
-2
-catluvr
-dogluvr
-4
-
-idk why
-its like thta but
-its okay i think
-aa
-Subject Seventh
+I DIDNT KNOW!!
+Happy 19th Birthday :))
+Wish you the best! x
+jajajad12
+I'm new here!
 0
 4
 catluvr
-dogluvr
-sidney
-1
-2
-
-hi one i see u
-aa
-Subject IM WATCHING U
-0
-1
-1
+XxSidneyxX
+xXRachelXx
+euhnre
 4
 
-HE 
-HEHEH
-HEHHEHEHE ...
+Hello! It's my first time trying this!
+I'm so excited :)
+Hoping for more conversations x
+jill
+How've you been?
+0
+4
+XxSidneyxX
+xXRachelXx
+euhnre
+gab
+6
+
+Did you hear the news?
+I heared they the DLSU library
+hired a cat to work for them
+
+I hope they get good benefits ..
+xXRachelXx
+Can we FINALLY pass the MP?
+0
+1
+XxSidneyxX
+6
+
+I have not blinked for 30
+minutes straight .. all I see
+are lines and letters
+
+How about you?
+xXRachelXx
+Lunch at my place TOMORROW!!
+1
+1
+ALL_USERS
+5
+Come over to my house at [REDACTED]
+if you wan't some good chinese food
+cooked by yours truly ;)
+
+Vegan options are available too!

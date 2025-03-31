@@ -1,159 +1,176 @@
-void Modify_Account_Security(int user_index){
+/************************************************************************************************************************
+
+	Modify_Password() function allows the user to change their password after entering their old password,
+	and typing their new password twice
+
+	@param Total_Users - array of structures containing user's message details (sender, recipient, message, etc)
+
+	@param user_index - integer containing user's index 
 	
-	int select, i, match = 0, run = 0, index = 1;
-	char old_password[PASSWORD_LENGTH];
-	char new_password1[PASSWORD_LENGTH];
-	char new_password2[PASSWORD_LENGTH];
-	char old_answer[SECURITY_ANSWER_LENGTH];
+**************************************************************************************************************************/
+void Modify_Password(int Total_Users, int user_index)
+{
+    char old_password[PASSWORD_LENGTH];
+    char new_password1[PASSWORD_LENGTH];
+    char new_password2[PASSWORD_LENGTH];
+	
+	fflush(stdin);
+
+    int i, match = 0;
+
+	printf("\n=====================================================\n");
+	printf("\033[1;31m"); //red
+	printf("                 CHANGE PASSWORD                     \n");
+	printf("\033[0m");
+	printf("=====================================================\n");
+	
+    while(match == 0)
+    {
+        printf("Enter Old Password: ");
+        fgets(old_password, sizeof(old_password), stdin);
+        old_password[strcspn(old_password, "\n")] = '\0'; // Remove newline
+
+        // Decrypt stored password (shifting by -1)
+        char decrypted_password[PASSWORD_LENGTH];
+        strcpy(decrypted_password, user[user_index].Password);
+        for(i = 0; i < strlen(decrypted_password); i++)
+        {
+            decrypted_password[i] = decrypted_password[i] - 1;
+        }
+
+        // Compare decrypted password with user input
+        if(strcmp(decrypted_password, old_password) == 0) //checks if User typed old password correctly
+        {
+            printf("Enter New Password: ");
+            fgets(new_password1, sizeof(new_password1), stdin);
+            new_password1[strcspn(new_password1, "\n")] = '\0';
+
+            printf("Enter New Password Again: ");
+            fgets(new_password2, sizeof(new_password2), stdin);
+            new_password2[strcspn(new_password2, "\n")] = '\0';
+
+            if(strcmp(new_password1, new_password2) == 0) //checks if the new password is entered twice correctly
+            {
+                // Encrypt new password before storing (shifting by +1)
+                for(i = 0; i < strlen(new_password1); i++)
+                {
+                    new_password1[i] = new_password1[i] + 1;
+                }
+
+                strcpy(user[user_index].Password, new_password1);
+				
+                printf("\033[1;33m"); //yellow
+                printf("Password changed successfully!\n");
+				printf("\033[0m");
+                match = 1;
+
+                Save_User_File(Total_Users); // Save updated password to file
+            }
+            else
+            {
+				printf("\033[0;31m"); //red
+                printf("MISMATCH OF NEW PASSWORD\n");
+				printf("\033[0m");
+            }
+        }
+        else
+        {
+			printf("\033[0;31m"); //red
+            printf("INVALID OLD PASSWORD\n");
+			printf("\033[0m");
+        }
+    }
+}
+
+/************************************************************************************************************************
+
+	Modify_Security_Answer() function prints User's security question and asks them to enter their new security question
+	twice
+
+	@param message_entries - array of structures containing user's message details (sender, recipient, message, etc)
+
+	@param msgCount - pointer to an integer containing the total number of messages of all users
+
+	@param user_index - integer containing user's index 
+
+**************************************************************************************************************************/
+
+void Modify_Security_Answer(int Total_Users, int user_index)
+{
 	char new_answer1[SECURITY_ANSWER_LENGTH];
 	char new_answer2[SECURITY_ANSWER_LENGTH];
-	char row[1000];
-	strcpy(row,"");
-	strcpy(old_password,"");
-	strcpy(old_answer,"");
-	strcpy(new_password1,"");
-	strcpy(new_answer1,"");
-	strcpy(new_password2,"");
-	strcpy(new_answer2,"");
 	
-	FILE *file_pointer; // original file
-	FILE *temp_file_pointer; // temporary file
+	fflush(stdin);
 	
-	file_pointer = fopen("user.txt", "rt");
+	printf("\n=====================================================\n");
+	printf("\033[1;31m"); //red
+	printf("                CHANGE SECURITY ANSWER                      \n");
+	printf("\033[0m");
+	printf("=====================================================\n");
+	
+	printf("%s\n", user[user_index].Security_Question);
+	printf("Enter New Security Answer: ");
+	fgets(new_answer1, sizeof(new_answer1), stdin);
+	
+	printf("Enter New Security Answer Again: ");
+	fgets(new_answer2, sizeof(new_answer2), stdin);
+
+	if(strcmp(new_answer1, new_answer2)==0) //checks if the security answer is entered twice correctly
+	{
+		new_answer1[strcspn(new_answer1, "\n")] = '\0'; //replace newline with NULL
+		strcpy(user[user_index].Security_Answer, new_answer1);
+		
+		printf("\033[1;33m"); //yellow
+        printf("Security Answer changed successfully!\n");
+		printf("\033[0m");
+	}
+	else
+	{
+		printf("\033[0;31m"); //red
+		printf("MISMATCH OF NEW SECURITY ANSWER");
+		printf("\033[0m");
+	}
+	
+}
+
+/************************************************************************************************************************
+
+	Modify_Account_Security() function allows the user to choose if they want to modify their password or
+	security answer
+
+	@param user_index - integer containing user's index 
+
+**************************************************************************************************************************/
+
+void Modify_Account_Security(int user_index)
+{
+	
+	int select, Total_Users;
+	
+	Load_Users(&Total_Users);
 	
 	system("cls");
 	printf("=====================================================\n");
-	printf("                      USER PAGE                      \n");
-	printf("Welcome: %s!\n",user[user_index].Full_Name);
+	printf("\033[1;31m"); //red
+	printf("                MODIFY ACCOUNT SECURITY                      \n");
+	printf("\033[0m");
 	printf("=====================================================\n");
 	
 	printf("[1] Change Password\n[2] Change Security Answer\n");
+	printf("\033[1;33m"); //yellow
 	printf("Search by: ");
+	printf("\033[0m");
 	scanf("%d", &select);
-	
-// USE SYSTEM PAAAAAUUUUUUUUUUUUUUUUUSEEEEEEEEEEEEEEEEEEE
 
-/*********
-CHANGE PASSWORD
-
-We need to rewrite the entire user.txt into a temporary file to "edit" it. We will copy every row of the user.txt file
-into the temporary one, except for the user's row, which we have to change.
-
-**********/
-	
-	match = 0;
-	if(select == 1){
-		while(match == 0){
-		printf("\nChange Password\n");
-		printf("Enter Old Password: ");
-		scanf("%s", old_password);
-		
-		// decrpyts password
-		if(run == 0){
-			for(i=0; i<strlen(user[user_index].Password); i++){
-				user[user_index].Password[i] = user[user_index].Password[i]-1;
-				run++;
-			}
-		}
-		
-		// asks user to enter new password
-		if(strcmp(user[user_index].Password, old_password)==0){
-			printf("Enter New Password: ");
-			scanf("%s", new_password1);
-			printf("Enter New Password Again: ");
-			scanf("%s", new_password2);
-	
-			// encrypts password again
-			if(strcmp(new_password1, new_password2)==0){
-				for(i=0; i<strlen(new_password1); i++){
-					new_password1[i] = new_password1[i]+1;
-				}
-				
-				// CREATES NEW TEMPORARY FILE
-				temp_file_pointer = fopen("user_temp.txt", "wt");
-				while(fgets(row,sizeof(row),file_pointer)){
-					if(index == user_index){ // finds the user whos row we need to change
-						// WE HAVE TO TYPE THE WHOLE ROW OF THE USER AGAIN
-						strcpy(row,"");
-						strcat(row, user[user_index].Username);
-						strcat(row, ";");
-						strcat(row, user[user_index].Full_Name);
-						strcat(row, ";");
-						strcat(row, new_password1); // we replace the user[user_index].Password with the new password
-						strcat(row, ";");
-						strcat(row, user[user_index].Security_Question);
-						strcat(row, ";");
-						strcat(row, user[user_index].Security_Answer);
-						strcat(row, ";");
-						strcat(row, user[user_index].Description);
-						strcat(row, ";\n");
-						printf("row %s", row);
-					}
-				fwrite(&row, strlen(row), 1, temp_file_pointer);
-				index++; // goes through all of the rows, rewritting each one into user_temp.txt
-				}
-				// we need to close both files
-				fclose(file_pointer);
-				fclose(temp_file_pointer);
-				
-				remove("user.txt"); // delete the user.txt
-				rename("user_temp.txt", "user.txt"); // rename the temporary file into the user.txt
-			}
-			else
-				printf("MISMATCH OF NEW PASSWORD");
-			match++;
-		}
-		
-		if(strcmp(user[user_index].Password, old_password)!=0)
-			printf("INVALID\n");
-		}
+	if(select == 1)
+	{
+		Modify_Password(Total_Users, user_index);
+	}
+	else if(select == 2)
+	{
+		Modify_Security_Answer(Total_Users, user_index);
 	}
 	
-/*********
-CHANGE SECURITY
-
-Exact same logic as change password, but with the security answer instead.
-
-**********/
-
-	if(select == 2){
-		printf("%s\n", user[user_index].Security_Question);
-		printf("Enter New Security Answer: ");
-		scanf("%s", new_answer1);
-		printf("Enter New Security Answer: ");
-		scanf("%s", new_answer2);
-
-		if(strcmp(new_answer1, new_answer2)==0){
-			temp_file_pointer = fopen("user_temp.txt", "wt");
-			while(fgets(row,sizeof(row),file_pointer)){
-				if(index == user_index){
-					strcpy(row,"");
-					strcat(row, user[user_index].Username);
-					strcat(row, ";");
-					strcat(row, user[user_index].Full_Name);
-					strcat(row, ";");
-					strcat(row, user[user_index].Password);
-					strcat(row, ";");
-					strcat(row, user[user_index].Security_Question);
-					strcat(row, ";");
-					strcat(row, new_answer1);
-					strcat(row, ";");
-					strcat(row, user[user_index].Description);
-					strcat(row, ";\n");
-					printf("row %s", row);
-				}
-			fwrite(&row, strlen(row), 1, temp_file_pointer);
-			index++;
-			}
-			fclose(file_pointer);
-			fclose(temp_file_pointer);
-			
-			remove("user.txt");
-			rename("user_temp.txt", "user.txt");
-		}
-		else
-			printf("MISMATCH OF NEW SECURITY ANSWER");
-	}
+	Save_User_File(Total_Users);
 	
-	system("pause");
 }

@@ -12,7 +12,6 @@ void Create_Account()
 	
 	int i;
 	int index, notFound;
-	char Security_Question[100];
 	
 	Load_Users(&index); //accesses the details in user.txt file
 	
@@ -75,8 +74,8 @@ void Create_Account()
 	/**** SECURITY QUESTION ****/
 	
 		printf("Input any security question (ex. What is your favorite color?): ");
-		fgets(Security_Question, sizeof(Security_Question), stdin);
-		Security_Question[strcspn(Security_Question, "\n")] = '\0';
+		fgets(user[index].Security_Question, sizeof(user[index].Security_Question), stdin);
+		user[index].Security_Question[strcspn(user[index].Security_Question, "\n")] = '\0';
 	
 	/**** SECURITY ANSWER ****/
 	
